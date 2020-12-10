@@ -9,11 +9,25 @@ window.onload = async () => {
     if(!isNaN(page)) page = Number(page);
     else page = 1;
 
-    document.getElementById('main').innerHTML = await renderPost(repo, branch, page);
+    await renderPost(repo, branch, page);
+
+    document.getElementById('page_p').onclick = async () => {
+        page--;
+        await renderPost(repo, branch, page);
+    }
+
+    document.getElementById('page_n').onclick = async () => {
+        page++;
+        await renderPost(repo, branch, page);
+    }
 }
 
 async function renderPost(repo, branch, page) {
     const result = await fetch(`https://raw.githubusercontent.com/${repo}/${branch}/raw/${page}.md`);
     const text = await result.text();
-    return marked(text);
+    document.getElementById('main').innerHTML = text;
+
+    if(page < 2) document.getElementById('page_p').hidden = true;
+    else document.getElementById('page_p').hidden = false;
+    return;
 }
