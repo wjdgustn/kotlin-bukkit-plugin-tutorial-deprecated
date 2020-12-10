@@ -27,7 +27,7 @@ async function renderPost(repo, branch, page) {
     const text = await result.text();
     document.getElementById('main').innerHTML = marked(text);
 
-    location.search = `?page=${page}`;
+    history.pushState(`?page=${page}`);
 
     if(page < 2) document.getElementById('page_p').hidden = true;
     else document.getElementById('page_p').hidden = false;
