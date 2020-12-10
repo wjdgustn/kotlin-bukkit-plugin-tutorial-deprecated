@@ -25,7 +25,9 @@ window.onload = async () => {
 async function renderPost(repo, branch, page) {
     const result = await fetch(`https://raw.githubusercontent.com/${repo}/${branch}/raw/${page}.md`);
     const text = await result.text();
-    document.getElementById('main').innerHTML = marked(text);
+
+    if(result.status == 404) document.getElementById('main').innerHTML = '<h1>글이 존재하지 않습니다!</h1>';
+    else document.getElementById('main').innerHTML = marked(text);
 
     history.pushState(null, null, `?page=${page}`);
 
