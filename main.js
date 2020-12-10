@@ -25,7 +25,7 @@ window.onload = async () => {
 async function renderPost(repo, branch, page) {
     const result = await fetch(`https://raw.githubusercontent.com/${repo}/${branch}/raw/${page}.md`);
     const text = await result.text();
-    document.getElementById('main').innerHTML = text;
+    document.getElementById('main').innerHTML = marked(text);
 
     if(page < 2) document.getElementById('page_p').hidden = true;
     else document.getElementById('page_p').hidden = false;
