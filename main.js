@@ -1,7 +1,7 @@
 const branch = 'master';
 
 window.onload = () => {
-    if(!window.location.hostname.endsWith('.github.io')) return throw new Error('Here is not github.io website.');
+    if(!window.location.hostname.endsWith('.github.io')) throw new Error('Here is not github.io website.');
     const repo = `${window.location.hostname.replace('.github.io', '')}/${window.location.pathname == '/' ? window.location.hostname : (window.location.pathname.replace('/', '').split('/')[0])}`;
 
     let page = 1;
